@@ -102,7 +102,53 @@ class doublyLinkedlist{
 
     }
 
+    // 4 Delete first Node of List 
+    public void DeleteBegin(){
+        if(head==null){
+            System.out.println("Node not found");
+            return ; 
+        }else{
+            head = head.nref ; 
+        }
+    }
+
+    //5 delete at anyPosition
+    public void DeleteatPos(int Pos) {
+        if (head == null) {
+            System.out.println("Node not found");
+            return;
+        }
+        if (Pos == 1) {
+            DeleteBegin();
+        } else {
+            Node temp = head;
+            for (int i = 1; i < Pos - 1; i++) {
+                temp = temp.nref;
+            }
+            Node temp2 = temp.nref;
+            if (temp2.nref != null) { // Check if temp2 is not the last node
+                temp2.nref.pref = temp;
+            }
+            temp.nref = temp2.nref;
+            temp2.pref = null;
+            temp2.nref = null;
+        }
+    }
     
+
+    //6 delete at lastPosition 
+    public void DeleteEnd(){
+        if(head==null){
+            System.out.println("Node not found");
+            return ; 
+        }else{
+            Node temp = head ; 
+            while(temp.nref.nref!=null){
+                temp = temp.nref ;
+            }temp.nref.pref = null ; 
+            temp.nref = null ; 
+        }
+    }
 
     // Method for Display element of DobulyLinked List 
     public void Traverse(){
@@ -122,6 +168,8 @@ class doublyLinkedlist{
         //insert at begin
         d.InsertBegin(12);
         d.InsertBegin(24);
+        d.InsertBegin(102);
+        d.InsertBegin(294);
 
         //insert at any position
         d.InsertatPos(33, 1);
@@ -131,10 +179,21 @@ class doublyLinkedlist{
         d.InsertatEnd(100);
         d.InsertatEnd(230);
 
+        //delete at begin
+        d.DeleteBegin();
+        d.DeleteBegin();
+
+        // delete at any Position 
+        d.DeleteatPos(3);
+
+        //delete at end
+        d.DeleteEnd();
+        d.DeleteEnd();
+
         // display 
         d.Traverse();
 
-        System.out.println(d.Is_empty()); 
-        System.out.println("Length of DoublyLinked list is :- "+d.Length());
+        // System.out.println(d.Is_empty()); 
+        // System.out.println("Length of DoublyLinked list is :- "+d.Length());
     }
 }
